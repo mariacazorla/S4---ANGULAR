@@ -48,14 +48,15 @@ export class BooksList implements OnInit {
       ? `¿Borrar el libro "${book.title}"?`
       : '';
   });
-  // Me quedo con los libros cuyo título o ISBN contiene lo que se ha escrito
+  // Busco por título, ISBN, descripción o editorial
   filteredBooks = computed(() => {
     const text = this.search().trim().toLowerCase();
     return this.books().filter(
       (book) => 
         book.title.toLowerCase().includes(text) || 
         book.isbn.toLowerCase().includes(text) ||
-        (book.description && book.description.toLowerCase().includes(text))
+        (book.description && book.description.toLowerCase().includes(text)) ||
+        (book.publisher && book.publisher.toLowerCase().includes(text))
     );
   });
 
